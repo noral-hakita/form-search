@@ -613,7 +613,7 @@
 
     <script>
         // Configuration - Update with your n8n webhook URL
-        const N8N_SEARCH_WEBHOOK = 'https://noral.gleeze.com/webhook/form-search'; // Update this URL
+        const N8N_SEARCH_WEBHOOK = 'https://noral.gleeze.com/webhook/form-search';
         
         let currentPage = 1;
         const itemsPerPage = 5;
@@ -647,9 +647,13 @@
                 action: 'search'
             };
 
+            console.log('=== WEBPAGE DEBUG: Sending search ===');
+            console.log('Search criteria:', searchCriteria);
+
             // Show loading
             document.getElementById('loading').style.display = 'block';
             document.getElementById('resultsContainer').style.display = 'none';
+            document.getElementById('exportBtn').style.display = 'none';
             
             try {
                 const response = await fetch(N8N_SEARCH_WEBHOOK, {
@@ -660,22 +664,34 @@
                     body: JSON.stringify(searchCriteria)
                 });
                 
+                console.log('Response status:', response.status);
+                console.log('Response OK?', response.ok);
+                
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 
                 const data = await response.json();
                 
+                console.log('=== WEBPAGE DEBUG: Received response ===');
+                console.log('Full response:', data);
+                console.log('Success?', data.success);
+                console.log('Count?', data.count);
+                console.log('Results length?', data.results ? data.results.length : 0);
+                console.log('Message?', data.message);
+                
                 // Hide loading
                 document.getElementById('loading').style.display = 'none';
                 
                 if (data.success && data.results && data.results.length > 0) {
+                    console.log('✓ Will display results');
                     allForms = data.results;
                     filteredForms = allForms;
                     currentPage = 1;
                     displayResults();
                 } else {
-                    displayNoResults();
+                    console.log('✗ Will display NO results');
+                    displayNoResults(data.message || 'No forms found');
                 }
                 
             } catch (error) {
@@ -686,6 +702,9 @@
         }
 
         function displayResults() {
+            console.log('=== DISPLAYING RESULTS ===');
+            console.log('Total forms to display:', filteredForms.length);
+            
             const resultsList = document.getElementById('resultsList');
             resultsList.innerHTML = '';
             
@@ -693,26 +712,43 @@
             const endIndex = startIndex + itemsPerPage;
             const pageForms = filteredForms.slice(startIndex, endIndex);
             
+            console.log('Page forms:', pageForms.length);
+            
+            if (pageForms.length === 0) {
+                displayNoResults('No forms to display');
+                return;
+            }
+            
             pageForms.forEach((form, index) => {
+                console.log(`Creating card for form ${index}:`, form.employeeName);
+                
                 const card = document.createElement('div');
                 card.className = 'form-card';
                 
                 // Format timestamp
                 let formDate = 'N/A';
                 if (form.timestamp) {
-                    const date = new Date(form.timestamp);
-                    formDate = date.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                    });
+                    try {
+                        const date = new Date(form.timestamp);
+                        formDate = date.toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        });
+                    } catch (e) {
+                        console.error('Date parsing error:', e);
+                    }
                 }
                 
                 // Determine month from timestamp if not explicitly provided
                 let formMonth = form.month || 'N/A';
                 if (!form.month && form.timestamp) {
-                    const date = new Date(form.timestamp);
-                    formMonth = date.toLocaleDateString('en-US', { month: 'long' });
+                    try {
+                        const date = new Date(form.timestamp);
+                        formMonth = date.toLocaleDateString('en-US', { month: 'long' });
+                    } catch (e) {
+                        // Ignore error
+                    }
                 }
                 
                 card.innerHTML = `
@@ -786,16 +822,15 @@
                         </div>
                     </div>
                     
-                    ${form.Qr || form.qrTypeFormatted ? `
+                    ${form.Qr ? `
                     <div class="qr-info">
                         <div class="qr-label"><i class="fas fa-qrcode"></i> QR Information</div>
-                        <div>${form.Qr || form.qrTypeFormatted || 'No QR information'}</div>
+                        <div>${form.Qr || 'No QR information'}</div>
                     </div>
                     ` : ''}
                     
                     <div style="margin-top: 15px; font-size: 12px; color: var(--gray);">
                         <i class="fas fa-info-circle"></i> Referral ID: ${form.referalID || 'N/A'} | 
-                        Near: ${form.near || 'N/A'} | 
                         Email: ${form.email || 'N/A'}
                     </div>
                 `;
@@ -806,6 +841,11 @@
             updatePagination();
             document.getElementById('resultsContainer').style.display = 'block';
             document.getElementById('exportBtn').style.display = 'inline-flex';
+            
+            // Debug: Check if elements are visible
+            console.log('resultsContainer display:', document.getElementById('resultsContainer').style.display);
+            console.log('resultsList children:', document.getElementById('resultsList').children.length);
+            console.log('✓ Results displayed successfully');
         }
 
         function updateResultsCount() {
@@ -817,12 +857,14 @@
                 `Showing ${start}-${end} of ${total} form${total !== 1 ? 's' : ''}`;
         }
 
-        function displayNoResults() {
+        function displayNoResults(message = 'No forms found') {
+            console.log('Displaying no results:', message);
+            
             const resultsList = document.getElementById('resultsList');
             resultsList.innerHTML = `
                 <div class="no-results">
                     <i class="fas fa-search"></i>
-                    <h3>No forms found</h3>
+                    <h3>${message}</h3>
                     <p>Try adjusting your search criteria or try different filters.</p>
                     <button class="btn btn-secondary" onclick="resetFilters()" style="margin-top: 20px;">
                         <i class="fas fa-redo"></i> Reset All Filters
@@ -832,9 +874,13 @@
             document.getElementById('resultsContainer').style.display = 'block';
             document.getElementById('pagination').style.display = 'none';
             document.getElementById('exportBtn').style.display = 'none';
+            
+            console.log('No results message displayed');
         }
 
         function displayError(message) {
+            console.log('Displaying error:', message);
+            
             const resultsList = document.getElementById('resultsList');
             resultsList.innerHTML = `
                 <div class="no-results">
@@ -891,6 +937,8 @@
             filteredForms = [];
             currentPage = 1;
             document.getElementById('exportBtn').style.display = 'none';
+            
+            console.log('Filters reset');
         }
 
         function exportResults() {
@@ -920,7 +968,7 @@
                 form.companyType || '',
                 form.bankName || '',
                 form.accountNumber || '',
-                form.Qr || form.qrTypeFormatted || '',
+                form.Qr || '',
                 form.timestamp || ''
             ]);
             
@@ -956,6 +1004,8 @@
 
         // Auto-focus on first input
         document.getElementById('searchEmployeeName').focus();
+        
+        console.log('Webpage JavaScript loaded successfully');
     </script>
 </body>
 </html>
