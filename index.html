@@ -7,6 +7,7 @@
     <title>Merchant Form Search - ADMAA</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* [Keep all your existing CSS styles] */
         :root {
             --primary: #3498db;
             --primary-dark: #2980b9;
@@ -422,6 +423,52 @@
              color: var(--light);
         }
 
+        /* Debug panel styles */
+        .debug-panel {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .debug-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .debug-log {
+            margin: 5px 0;
+            padding: 5px;
+            border-bottom: 1px solid #34495e;
+        }
+
+        .debug-success {
+            color: #2ecc71;
+        }
+
+        .debug-error {
+            color: #e74c3c;
+        }
+
+        .debug-info {
+            color: #3498db;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 20px;
@@ -483,7 +530,7 @@
             <div class="search-grid">
                 <div class="form-group">
                     <label><i class="fas fa-user-tie"></i> Employee Name</label>
-                    <input type="text" id="searchEmployeeName" placeholder="Enter employee name">
+                    <input type="text" id="searchEmployeeName" placeholder="Enter employee name" value="rehan">
                 </div>
                 
                 <div class="form-group">
@@ -574,6 +621,9 @@
                 <button class="btn btn-secondary" onclick="resetFilters()">
                     <i class="fas fa-redo"></i> Reset Filters
                 </button>
+                <button class="btn btn-success" onclick="testConnection()">
+                    <i class="fas fa-wifi"></i> Test Connection
+                </button>
                 <button class="btn btn-success export-btn" onclick="exportResults()" style="display: none;" id="exportBtn">
                     <i class="fas fa-download"></i> Export Results
                 </button>
@@ -604,6 +654,12 @@
             </div>
         </div>
         
+        <!-- Debug Panel -->
+        <div class="debug-panel" id="debugPanel">
+            <h3 style="color: white; margin-top: 0;">Debug Logs</h3>
+            <div id="debugLogs"></div>
+        </div>
+        
         <div class="footer" style="margin-top: 40px; text-align: center; padding-top: 20px; border-top: 1px solid var(--border); color: var(--gray);">
             <p>ADMAA Retail Enablement Service (Pvt.) Ltd.<br>
             <i class="fas fa-globe"></i> <a href="https://admaa.pk" target="_blank" style="color: var(--primary);">admaa.pk</a> | 
@@ -611,14 +667,38 @@
         </div>
     </div>
 
+    <!-- Debug Toggle Button -->
+    <button class="debug-toggle" onclick="toggleDebug()">
+        <i class="fas fa-bug"></i> Debug
+    </button>
+
     <script>
         // Configuration - Update with your n8n webhook URL
-        const N8N_SEARCH_WEBHOOK = 'https://noral.gleeze.com/webhook/form-search'; // Update this URL
+        const N8N_SEARCH_WEBHOOK = 'https://noral.gleeze.com/webhook/form-search';
         
         let currentPage = 1;
         const itemsPerPage = 5;
         let allForms = [];
         let filteredForms = [];
+
+        // Debug logging function
+        function debugLog(message, type = 'info') {
+            const debugLogs = document.getElementById('debugLogs');
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = `debug-log debug-${type}`;
+            logEntry.innerHTML = `<strong>[${timestamp}]</strong> ${message}`;
+            debugLogs.appendChild(logEntry);
+            debugLogs.scrollTop = debugLogs.scrollHeight;
+            
+            // Also log to console
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+
+        function toggleDebug() {
+            const debugPanel = document.getElementById('debugPanel');
+            debugPanel.style.display = debugPanel.style.display === 'none' ? 'block' : 'none';
+        }
 
         // Theme Toggle
         document.getElementById('theme-toggle').addEventListener('click', () => {
@@ -634,6 +714,42 @@
             }
         });
 
+        async function testConnection() {
+            debugLog('Testing connection to n8n webhook...', 'info');
+            
+            const testData = {
+                employeeName: 'test',
+                action: 'search'
+            };
+            
+            try {
+                const response = await fetch(N8N_SEARCH_WEBHOOK, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(testData)
+                });
+                
+                debugLog(`Response Status: ${response.status} ${response.statusText}`, 'info');
+                
+                const responseText = await response.text();
+                debugLog(`Raw Response: ${responseText}`, 'info');
+                
+                try {
+                    const data = JSON.parse(responseText);
+                    debugLog(`Parsed JSON: ${JSON.stringify(data, null, 2)}`, 'success');
+                    alert(`Connection Test Successful!\nStatus: ${response.status}\nMessage: ${data.message || 'No message'}`);
+                } catch (e) {
+                    debugLog(`Failed to parse JSON: ${e.message}`, 'error');
+                    alert('Connection successful but invalid JSON response');
+                }
+            } catch (error) {
+                debugLog(`Connection Error: ${error.message}`, 'error');
+                alert(`Connection Failed: ${error.message}`);
+            }
+        }
+
         async function searchForms() {
             const searchCriteria = {
                 employeeName: document.getElementById('searchEmployeeName').value.trim(),
@@ -647,11 +763,16 @@
                 action: 'search'
             };
 
+            debugLog('Starting search with criteria:', 'info');
+            debugLog(JSON.stringify(searchCriteria, null, 2), 'info');
+            
             // Show loading
             document.getElementById('loading').style.display = 'block';
             document.getElementById('resultsContainer').style.display = 'none';
             
             try {
+                debugLog(`Sending POST request to: ${N8N_SEARCH_WEBHOOK}`, 'info');
+                
                 const response = await fetch(N8N_SEARCH_WEBHOOK, {
                     method: 'POST',
                     headers: {
@@ -660,38 +781,72 @@
                     body: JSON.stringify(searchCriteria)
                 });
                 
+                debugLog(`Response received - Status: ${response.status} ${response.statusText}`, 'info');
+                debugLog(`Response Headers: ${JSON.stringify([...response.headers])}`, 'info');
+                
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
                 }
                 
-                const data = await response.json();
+                const responseText = await response.text();
+                debugLog(`Raw Response Text (${responseText.length} chars):`, 'info');
+                debugLog(responseText.substring(0, 500) + (responseText.length > 500 ? '...' : ''), 'info');
+                
+                let data;
+                try {
+                    data = JSON.parse(responseText);
+                    debugLog('✅ Successfully parsed JSON response', 'success');
+                    debugLog(`Response data: ${JSON.stringify(data, null, 2)}`, 'info');
+                } catch (e) {
+                    debugLog(`❌ Failed to parse JSON: ${e.message}`, 'error');
+                    throw new Error(`Invalid JSON response: ${e.message}`);
+                }
                 
                 // Hide loading
                 document.getElementById('loading').style.display = 'none';
                 
-                if (data.success && data.results && data.results.length > 0) {
-                    allForms = data.results;
-                    filteredForms = allForms;
-                    currentPage = 1;
-                    displayResults();
+                if (data.success) {
+                    debugLog(`Search successful. Count: ${data.count}, Message: ${data.message}`, 'success');
+                    
+                    if (data.results && data.results.length > 0) {
+                        debugLog(`Found ${data.results.length} forms`, 'success');
+                        allForms = data.results;
+                        filteredForms = allForms;
+                        currentPage = 1;
+                        displayResults();
+                    } else {
+                        debugLog('No forms found matching criteria', 'info');
+                        displayNoResults();
+                    }
                 } else {
-                    displayNoResults();
+                    debugLog(`Search failed: ${data.message || 'Unknown error'}`, 'error');
+                    displayError(data.message || 'Search failed');
                 }
                 
             } catch (error) {
-                console.error('Search Error:', error);
+                debugLog(`❌ Search Error: ${error.message}`, 'error');
+                console.error('Search Error Details:', error);
                 document.getElementById('loading').style.display = 'none';
-                displayError('Error searching forms. Please check the connection and try again.');
+                displayError('Error searching forms: ' + error.message);
             }
         }
 
         function displayResults() {
+            debugLog(`Displaying ${filteredForms.length} forms on page ${currentPage}`, 'info');
+            
             const resultsList = document.getElementById('resultsList');
             resultsList.innerHTML = '';
             
             const startIndex = (currentPage - 1) * itemsPerPage;
             const endIndex = startIndex + itemsPerPage;
             const pageForms = filteredForms.slice(startIndex, endIndex);
+            
+            debugLog(`Showing forms ${startIndex + 1} to ${endIndex}`, 'info');
+            
+            if (pageForms.length === 0) {
+                debugLog('No forms to display on this page', 'warning');
+                return;
+            }
             
             pageForms.forEach((form, index) => {
                 const card = document.createElement('div');
@@ -700,26 +855,36 @@
                 // Format timestamp
                 let formDate = 'N/A';
                 if (form.timestamp) {
-                    const date = new Date(form.timestamp);
-                    formDate = date.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                    });
+                    try {
+                        const date = new Date(form.timestamp);
+                        formDate = date.toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        });
+                    } catch (e) {
+                        formDate = form.timestamp;
+                    }
                 }
                 
                 // Determine month from timestamp if not explicitly provided
                 let formMonth = form.month || 'N/A';
                 if (!form.month && form.timestamp) {
-                    const date = new Date(form.timestamp);
-                    formMonth = date.toLocaleDateString('en-US', { month: 'long' });
+                    try {
+                        const date = new Date(form.timestamp);
+                        formMonth = date.toLocaleDateString('en-US', { month: 'long' });
+                    } catch (e) {
+                        // Keep as N/A
+                    }
                 }
+                
+                debugLog(`Creating card for form: ${form.employeeName || 'Unknown'}`, 'info');
                 
                 card.innerHTML = `
                     <div class="card-header">
                         <div>
-                            <h3 style="margin: 0; color: var(--secondary);">${form.companyName || 'Unnamed Company'}</h3>
-                            <div class="form-date">Submitted: ${formDate}</div>
+                            <h3 style="margin: 0; color: var(--secondary);">${escapeHtml(form.companyName || 'Unnamed Company')}</h3>
+                            <div class="form-date">Submitted: ${escapeHtml(formDate)}</div>
                         </div>
                         <div class="form-id">Form #${startIndex + index + 1}</div>
                     </div>
@@ -727,76 +892,76 @@
                     <div class="details-grid">
                         <div class="detail-group">
                             <div class="detail-label">Employee Name</div>
-                            <div class="detail-value">${form.employeeName || 'N/A'}</div>
+                            <div class="detail-value">${escapeHtml(form.employeeName || 'N/A')}</div>
                         </div>
                         
                         <div class="detail-group">
                             <div class="detail-label">Brand Name</div>
-                            <div class="detail-value">${form.brandName || 'N/A'}</div>
+                            <div class="detail-value">${escapeHtml(form.brandName || 'N/A')}</div>
                         </div>
                         
                         <div class="detail-group">
                             <div class="detail-label">Location</div>
-                            <div class="detail-value">${form.area || 'N/A'}, ${form.city || 'N/A'}</div>
+                            <div class="detail-value">${escapeHtml(form.area || 'N/A')}, ${escapeHtml(form.city || 'N/A')}</div>
                         </div>
                         
                         <div class="detail-group">
                             <div class="detail-label">Month</div>
-                            <div class="detail-value">${formMonth}</div>
+                            <div class="detail-value">${escapeHtml(formMonth)}</div>
                         </div>
                         
                         <div class="detail-group">
                             <div class="detail-label">Shop Type</div>
-                            <div class="detail-value">${form.shopType || 'N/A'}</div>
+                            <div class="detail-value">${escapeHtml(form.shopType || 'N/A')}</div>
                         </div>
                         
                         <div class="detail-group">
                             <div class="detail-label">Applicant Name</div>
-                            <div class="detail-value">${form.applicantName || 'N/A'}</div>
+                            <div class="detail-value">${escapeHtml(form.applicantName || 'N/A')}</div>
                         </div>
                         
                         <div class="detail-group">
                             <div class="detail-label">Mobile Number</div>
-                            <div class="detail-value">${form.mobileNumber || 'N/A'}</div>
+                            <div class="detail-value">${escapeHtml(form.mobileNumber || 'N/A')}</div>
                         </div>
                         
                         <div class="detail-group">
                             <div class="detail-label">CNIC #</div>
-                            <div class="detail-value">${form.cnic || 'N/A'}</div>
+                            <div class="detail-value">${escapeHtml(form.cnic || 'N/A')}</div>
                         </div>
                         
                         <div class="detail-group">
                             <div class="detail-label">Company Type</div>
-                            <div class="detail-value">${form.companyType || 'N/A'}</div>
+                            <div class="detail-value">${escapeHtml(form.companyType || 'N/A')}</div>
                         </div>
                         
                         <div class="detail-group">
                             <div class="detail-label">Business Type</div>
-                            <div class="detail-value">${form.businessType || 'N/A'}</div>
+                            <div class="detail-value">${escapeHtml(form.businessType || 'N/A')}</div>
                         </div>
                         
                         <div class="detail-group">
                             <div class="detail-label">Bank Name</div>
-                            <div class="detail-value">${form.bankName || 'N/A'}</div>
+                            <div class="detail-value">${escapeHtml(form.bankName || 'N/A')}</div>
                         </div>
                         
                         <div class="detail-group">
                             <div class="detail-label">Account Number</div>
-                            <div class="detail-value">${form.accountNumber || 'N/A'}</div>
+                            <div class="detail-value">${escapeHtml(form.accountNumber || 'N/A')}</div>
                         </div>
                     </div>
                     
                     ${form.Qr || form.qrTypeFormatted ? `
                     <div class="qr-info">
                         <div class="qr-label"><i class="fas fa-qrcode"></i> QR Information</div>
-                        <div>${form.Qr || form.qrTypeFormatted || 'No QR information'}</div>
+                        <div>${escapeHtml(form.Qr || form.qrTypeFormatted || 'No QR information')}</div>
                     </div>
                     ` : ''}
                     
                     <div style="margin-top: 15px; font-size: 12px; color: var(--gray);">
-                        <i class="fas fa-info-circle"></i> Referral ID: ${form.referalID || 'N/A'} | 
-                        Near: ${form.near || 'N/A'} | 
-                        Email: ${form.email || 'N/A'}
+                        <i class="fas fa-info-circle"></i> Referral ID: ${escapeHtml(form.referalID || 'N/A')} | 
+                        Near: ${escapeHtml(form.near || 'N/A')} | 
+                        Email: ${escapeHtml(form.email || 'N/A')}
                     </div>
                 `;
                 resultsList.appendChild(card);
@@ -806,6 +971,16 @@
             updatePagination();
             document.getElementById('resultsContainer').style.display = 'block';
             document.getElementById('exportBtn').style.display = 'inline-flex';
+            
+            debugLog('Results displayed successfully', 'success');
+        }
+
+        // Helper function to escape HTML
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
 
         function updateResultsCount() {
@@ -818,6 +993,8 @@
         }
 
         function displayNoResults() {
+            debugLog('Displaying "no results" message', 'info');
+            
             const resultsList = document.getElementById('resultsList');
             resultsList.innerHTML = `
                 <div class="no-results">
@@ -835,12 +1012,14 @@
         }
 
         function displayError(message) {
+            debugLog(`Displaying error: ${message}`, 'error');
+            
             const resultsList = document.getElementById('resultsList');
             resultsList.innerHTML = `
                 <div class="no-results">
                     <i class="fas fa-exclamation-triangle" style="color: var(--accent);"></i>
                     <h3>Error</h3>
-                    <p>${message}</p>
+                    <p>${escapeHtml(message)}</p>
                     <button class="btn btn-primary" onclick="searchForms()" style="margin-top: 20px;">
                         <i class="fas fa-sync-alt"></i> Try Again
                     </button>
@@ -862,6 +1041,7 @@
         }
 
         function nextPage() {
+            debugLog(`Moving to next page (from ${currentPage})`, 'info');
             const totalPages = Math.ceil(filteredForms.length / itemsPerPage);
             if (currentPage < totalPages) {
                 currentPage++;
@@ -870,6 +1050,7 @@
         }
 
         function previousPage() {
+            debugLog(`Moving to previous page (from ${currentPage})`, 'info');
             if (currentPage > 1) {
                 currentPage--;
                 displayResults();
@@ -877,6 +1058,8 @@
         }
 
         function resetFilters() {
+            debugLog('Resetting all filters', 'info');
+            
             document.getElementById('searchEmployeeName').value = '';
             document.getElementById('searchCompanyName').value = '';
             document.getElementById('searchCity').value = '';
@@ -891,6 +1074,8 @@
             filteredForms = [];
             currentPage = 1;
             document.getElementById('exportBtn').style.display = 'none';
+            
+            debugLog('Filters reset successfully', 'success');
         }
 
         function exportResults() {
@@ -898,6 +1083,8 @@
                 alert('No results to export.');
                 return;
             }
+            
+            debugLog(`Exporting ${filteredForms.length} forms to CSV`, 'info');
             
             // Convert to CSV
             const headers = [
@@ -926,7 +1113,7 @@
             
             const csvContent = [
                 headers.join(','),
-                ...csvData.map(row => row.map(cell => `"${cell}"`).join(','))
+                ...csvData.map(row => row.map(cell => `"${cell.replace(/"/g, '""')}"`).join(','))
             ].join('\n');
             
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -941,6 +1128,7 @@
             link.click();
             document.body.removeChild(link);
             
+            debugLog(`Exported ${filteredForms.length} forms successfully`, 'success');
             alert(`Exported ${filteredForms.length} forms successfully.`);
         }
 
@@ -956,6 +1144,12 @@
 
         // Auto-focus on first input
         document.getElementById('searchEmployeeName').focus();
+        
+        // Show debug panel by default
+        document.getElementById('debugPanel').style.display = 'block';
+        
+        debugLog('Page loaded successfully', 'success');
+        debugLog(`Webhook URL: ${N8N_SEARCH_WEBHOOK}`, 'info');
     </script>
 </body>
 </html>
