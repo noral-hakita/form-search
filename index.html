@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="x-icon" href="admaa.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merchant Form Search - ADMAA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --gray: #7f8c8d;
+            --success: #2ecc71;
+            --border: #ddd;
+            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+            --bg-color: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --form-bg: white;
+            --text-color: #333;
+            --section-bg: #f9fafb;
+            --section-border: #f9fafb;
+            --input-bg: white;
+            --input-border: var(--border);
+        }
+
+        body.dark-theme {
+            --bg-color: #2c3e50;
+            --form-bg: #34495e;
+            --text-color: #ecf0f1;
+            --section-bg: #293a4a;
+            --section-border: #4a637d;
+            --input-bg: #4c6883;
+            --input-border: #5a748c;
+            --border: #5a748c;
+            --gray: #bdc3c7;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-color);
+            min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: var(--form-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        h1 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-weight: 700;
+            font-size: 2.2rem;
+            transition: color 0.3s;
+        }
+        
+        body.dark-theme h1 {
+             color: var(--light);
+        }
+
+        .subtitle {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-top: 0;
+            transition: color 0.3s;
+        }
+
+        .search-panel {
+            background-color: var(--section-bg);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary);
+        }
+
+        .search-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--secondary);
+            transition: color 0.3s;
+        }
+        
+        body.dark-theme label {
+             color: var(--gray);
+        }
+
+        input[type="text"], input[type="date"], select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--input-border);
+            border-radius: 6px;
+            font-size: 15px;
+            transition: all 0.3s;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+        }
+        
+        body.dark-theme input, body.dark-theme select {
+            color: var(--light);
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--gray);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #6c757d;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+        }
+
+        .results-container {
+            margin-top: 40px;
+            display: none;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .results-count {
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+
+        .form-card {
+            background: var(--section-bg);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--success);
+            transition: transform 0.3s;
+        }
+
+        .form-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .form-id {
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .form-date {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .detail-group {
+            margin-bottom: 15px;
+        }
+
+        .detail-label {
+            font-size: 12px;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-size: 16px;
+            color: var(--text-color);
+            font-weight: 500;
+            padding: 8px 12px;
+            background: var(--input-bg);
+            border-radius: 6px;
+            border: 1px solid var(--input-border);
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .qr-info {
+            background: #e8f4fd;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 3px solid var(--primary);
+        }
+        
+        body.dark-theme .qr-info {
+            background: #293a4a;
+        }
+
+        .qr-label {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .pagination-btn {
+            padding: 10px 25px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pagination-btn:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .pagination-btn:hover:not(:disabled) {
+            background: var(--primary-dark);
+        }
+
+        .page-info {
+            font-size: 14px;
+            color: var(--gray);
+            font-weight: 600;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .spinner {
+            border: 4px solid var(--light);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 50px;
+            color: var(--gray);
+        }
+
+        .no-results i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+
+        #theme-toggle {
+            background-color: var(--secondary);
+            color: var(--light);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        #theme-toggle:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .export-btn {
+            background: var(--success);
+            color: white;
+        }
+
+        .export-btn:hover {
+            background: #27ae60;
+        }
+
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        body.dark-theme .section-title {
+             color: var(--light);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .search-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .pagination {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .form-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            #theme-toggle {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body class="light-theme">
+    <div class="container">
+        <div class="form-header">
+            <div class="logo">ADMAA - Form Search</div>
+            <button id="theme-toggle">
+                <i class="fas fa-moon"></i> Toggle Theme
+            </button>
+        </div>
+        
+        <div class="header">
+            <h1><i class="fas fa-search"></i> Merchant Form Search</h1>
+            <p class="subtitle">Search and view submitted merchant forms from the database</p>
+        </div>
+        
+        <div class="search-panel">
+            <div class="section-title">
+                <i class="fas fa-filter"></i> Search Filters
+            </div>
+            
+            <div class="search-grid">
+                <div class="form-group">
+                    <label><i class="fas fa-user-tie"></i> Employee Name</label>
+                    <input type="text" id="searchEmployeeName" placeholder="Enter employee name">
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-building"></i> Company Name</label>
+                    <input type="text" id="searchCompanyName" placeholder="Enter company name">
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-map-marker-alt"></i> City</label>
+                    <select id="searchCity">
+                        <option value="">All Cities</option>
+                        <option value="KHI">Karachi (KHI)</option>
+                        <option value="LHR">Lahore (LHR)</option>
+                        <option value="ISB">Islamabad (ISB)</option>
+                        <option value="HYD">Hyderabad (HYD)</option>
+                        <option value="MULTAN">Multan</option>
+                        <option value="FSD">Faisalabad (FSD)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-location-dot"></i> Area</label>
+                    <input type="text" id="searchArea" placeholder="Enter area">
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-calendar"></i> Month</label>
+                    <select id="searchMonth">
+                        <option value="">All Months</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-briefcase"></i> Business Type</label>
+                    <select id="searchBusinessType">
+                        <option value="">All Business Types</option>
+                        <option value="general">General Store</option>
+                        <option value="mobile">Mobile Accessories</option>
+                        <option value="medical">Medical Store</option>
+                        <option value="garments">Garments</option>
+                        <option value="grocery">Grocery Store</option>
+                        <option value="hair">Hair Cutting</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="restaurant">Restaurant</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-tag"></i> Company Type</label>
+                    <select id="searchCompanyType">
+                        <option value="">All Company Types</option>
+                        <option value="individual">Individual</option>
+                        <option value="proprietor">Proprietor</option>
+                        <option value="private">Private Ltd.</option>
+                        <option value="partnership">Partnership</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-store"></i> Shop Type</label>
+                    <select id="searchShopType">
+                        <option value="">All Shop Types</option>
+                        <option value="shop">Shop</option>
+                        <option value="mart">Mart</option>
+                        <option value="stall">Stall / Cabin</option>
+                        <option value="cart">Cart</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="searchForms()">
+                    <i class="fas fa-search"></i> Search Forms
+                </button>
+                <button class="btn btn-secondary" onclick="resetFilters()">
+                    <i class="fas fa-redo"></i> Reset Filters
+                </button>
+                <button class="btn btn-success export-btn" onclick="exportResults()" style="display: none;" id="exportBtn">
+                    <i class="fas fa-download"></i> Export Results
+                </button>
+            </div>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Searching merchant forms...</p>
+        </div>
+        
+        <div class="results-container" id="resultsContainer">
+            <div class="results-header">
+                <h2><i class="fas fa-list"></i> Search Results</h2>
+                <div class="results-count" id="resultsCount">Showing 0 results</div>
+            </div>
+            
+            <div id="resultsList"></div>
+            
+            <div class="pagination" id="pagination">
+                <button class="pagination-btn" onclick="previousPage()" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                <span class="page-info" id="pageInfo">Page 1 of 1</span>
+                <button class="pagination-btn" onclick="nextPage()" id="nextBtn">
+                    Next <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="footer" style="margin-top: 40px; text-align: center; padding-top: 20px; border-top: 1px solid var(--border); color: var(--gray);">
+            <p>ADMAA Retail Enablement Service (Pvt.) Ltd.<br>
+            <i class="fas fa-globe"></i> <a href="https://admaa.pk" target="_blank" style="color: var(--primary);">admaa.pk</a> | 
+            <i class="fas fa-phone"></i> 0300-8332737</p>
+        </div>
+    </div>
+
+    <script>
+        // Configuration - Update with your n8n webhook URL
+        const N8N_SEARCH_WEBHOOK = 'https://noral.gleeze.com/webhook/form-search'; // Update this URL
+        
+        let currentPage = 1;
+        const itemsPerPage = 5;
+        let allForms = [];
+        let filteredForms = [];
+
+        // Theme Toggle
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            document.body.classList.toggle('light-theme');
+            const icon = document.querySelector('#theme-toggle i');
+            if (document.body.classList.contains('dark-theme')) {
+                icon.className = 'fas fa-sun';
+                document.getElementById('theme-toggle').innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+            } else {
+                icon.className = 'fas fa-moon';
+                document.getElementById('theme-toggle').innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+            }
+        });
+
+        async function searchForms() {
+            const searchCriteria = {
+                employeeName: document.getElementById('searchEmployeeName').value.trim(),
+                companyName: document.getElementById('searchCompanyName').value.trim(),
+                city: document.getElementById('searchCity').value,
+                area: document.getElementById('searchArea').value.trim(),
+                month: document.getElementById('searchMonth').value,
+                businessType: document.getElementById('searchBusinessType').value,
+                companyType: document.getElementById('searchCompanyType').value,
+                shopType: document.getElementById('searchShopType').value,
+                action: 'search'
+            };
+
+            // Show loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('resultsContainer').style.display = 'none';
+            
+            try {
+                const response = await fetch(N8N_SEARCH_WEBHOOK, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(searchCriteria)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Hide loading
+                document.getElementById('loading').style.display = 'none';
+                
+                if (data.success && data.results && data.results.length > 0) {
+                    allForms = data.results;
+                    filteredForms = allForms;
+                    currentPage = 1;
+                    displayResults();
+                } else {
+                    displayNoResults();
+                }
+                
+            } catch (error) {
+                console.error('Search Error:', error);
+                document.getElementById('loading').style.display = 'none';
+                displayError('Error searching forms. Please check the connection and try again.');
+            }
+        }
+
+        function displayResults() {
+            const resultsList = document.getElementById('resultsList');
+            resultsList.innerHTML = '';
+            
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageForms = filteredForms.slice(startIndex, endIndex);
+            
+            pageForms.forEach((form, index) => {
+                const card = document.createElement('div');
+                card.className = 'form-card';
+                
+                // Format timestamp
+                let formDate = 'N/A';
+                if (form.timestamp) {
+                    const date = new Date(form.timestamp);
+                    formDate = date.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                }
+                
+                // Determine month from timestamp if not explicitly provided
+                let formMonth = form.month || 'N/A';
+                if (!form.month && form.timestamp) {
+                    const date = new Date(form.timestamp);
+                    formMonth = date.toLocaleDateString('en-US', { month: 'long' });
+                }
+                
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div>
+                            <h3 style="margin: 0; color: var(--secondary);">${form.companyName || 'Unnamed Company'}</h3>
+                            <div class="form-date">Submitted: ${formDate}</div>
+                        </div>
+                        <div class="form-id">Form #${startIndex + index + 1}</div>
+                    </div>
+                    
+                    <div class="details-grid">
+                        <div class="detail-group">
+                            <div class="detail-label">Employee Name</div>
+                            <div class="detail-value">${form.employeeName || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">Brand Name</div>
+                            <div class="detail-value">${form.brandName || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">Location</div>
+                            <div class="detail-value">${form.area || 'N/A'}, ${form.city || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">Month</div>
+                            <div class="detail-value">${formMonth}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">Shop Type</div>
+                            <div class="detail-value">${form.shopType || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">Applicant Name</div>
+                            <div class="detail-value">${form.applicantName || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">Mobile Number</div>
+                            <div class="detail-value">${form.mobileNumber || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">CNIC #</div>
+                            <div class="detail-value">${form.cnic || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">Company Type</div>
+                            <div class="detail-value">${form.companyType || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">Business Type</div>
+                            <div class="detail-value">${form.businessType || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">Bank Name</div>
+                            <div class="detail-value">${form.bankName || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">Account Number</div>
+                            <div class="detail-value">${form.accountNumber || 'N/A'}</div>
+                        </div>
+                    </div>
+                    
+                    ${form.Qr || form.qrTypeFormatted ? `
+                    <div class="qr-info">
+                        <div class="qr-label"><i class="fas fa-qrcode"></i> QR Information</div>
+                        <div>${form.Qr || form.qrTypeFormatted || 'No QR information'}</div>
+                    </div>
+                    ` : ''}
+                    
+                    <div style="margin-top: 15px; font-size: 12px; color: var(--gray);">
+                        <i class="fas fa-info-circle"></i> Referral ID: ${form.referalID || 'N/A'} | 
+                        Near: ${form.near || 'N/A'} | 
+                        Email: ${form.email || 'N/A'}
+                    </div>
+                `;
+                resultsList.appendChild(card);
+            });
+            
+            updateResultsCount();
+            updatePagination();
+            document.getElementById('resultsContainer').style.display = 'block';
+            document.getElementById('exportBtn').style.display = 'inline-flex';
+        }
+
+        function updateResultsCount() {
+            const total = filteredForms.length;
+            const start = Math.min((currentPage - 1) * itemsPerPage + 1, total);
+            const end = Math.min(currentPage * itemsPerPage, total);
+            
+            document.getElementById('resultsCount').textContent = 
+                `Showing ${start}-${end} of ${total} form${total !== 1 ? 's' : ''}`;
+        }
+
+        function displayNoResults() {
+            const resultsList = document.getElementById('resultsList');
+            resultsList.innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-search"></i>
+                    <h3>No forms found</h3>
+                    <p>Try adjusting your search criteria or try different filters.</p>
+                    <button class="btn btn-secondary" onclick="resetFilters()" style="margin-top: 20px;">
+                        <i class="fas fa-redo"></i> Reset All Filters
+                    </button>
+                </div>
+            `;
+            document.getElementById('resultsContainer').style.display = 'block';
+            document.getElementById('pagination').style.display = 'none';
+            document.getElementById('exportBtn').style.display = 'none';
+        }
+
+        function displayError(message) {
+            const resultsList = document.getElementById('resultsList');
+            resultsList.innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-exclamation-triangle" style="color: var(--accent);"></i>
+                    <h3>Error</h3>
+                    <p>${message}</p>
+                    <button class="btn btn-primary" onclick="searchForms()" style="margin-top: 20px;">
+                        <i class="fas fa-sync-alt"></i> Try Again
+                    </button>
+                </div>
+            `;
+            document.getElementById('resultsContainer').style.display = 'block';
+            document.getElementById('pagination').style.display = 'none';
+            document.getElementById('exportBtn').style.display = 'none';
+        }
+
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredForms.length / itemsPerPage);
+            document.getElementById('pageInfo').textContent = `Page ${currentPage} of ${totalPages}`;
+            
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages;
+            
+            document.getElementById('pagination').style.display = totalPages > 1 ? 'flex' : 'none';
+        }
+
+        function nextPage() {
+            const totalPages = Math.ceil(filteredForms.length / itemsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                displayResults();
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayResults();
+            }
+        }
+
+        function resetFilters() {
+            document.getElementById('searchEmployeeName').value = '';
+            document.getElementById('searchCompanyName').value = '';
+            document.getElementById('searchCity').value = '';
+            document.getElementById('searchArea').value = '';
+            document.getElementById('searchMonth').value = '';
+            document.getElementById('searchBusinessType').value = '';
+            document.getElementById('searchCompanyType').value = '';
+            document.getElementById('searchShopType').value = '';
+            
+            document.getElementById('resultsContainer').style.display = 'none';
+            allForms = [];
+            filteredForms = [];
+            currentPage = 1;
+            document.getElementById('exportBtn').style.display = 'none';
+        }
+
+        function exportResults() {
+            if (filteredForms.length === 0) {
+                alert('No results to export.');
+                return;
+            }
+            
+            // Convert to CSV
+            const headers = [
+                'Employee Name', 'Company Name', 'Brand Name', 'City', 'Area', 
+                'Month', 'Applicant Name', 'Mobile Number', 'CNIC', 'Business Type',
+                'Company Type', 'Bank Name', 'Account Number', 'QR Info', 'Timestamp'
+            ];
+            
+            const csvData = filteredForms.map(form => [
+                form.employeeName || '',
+                form.companyName || '',
+                form.brandName || '',
+                form.city || '',
+                form.area || '',
+                form.month || '',
+                form.applicantName || '',
+                form.mobileNumber || '',
+                form.cnic || '',
+                form.businessType || '',
+                form.companyType || '',
+                form.bankName || '',
+                form.accountNumber || '',
+                form.Qr || form.qrTypeFormatted || '',
+                form.timestamp || ''
+            ]);
+            
+            const csvContent = [
+                headers.join(','),
+                ...csvData.map(row => row.map(cell => `"${cell}"`).join(','))
+            ].join('\n');
+            
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            
+            link.setAttribute('href', url);
+            link.setAttribute('download', `merchant_forms_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            alert(`Exported ${filteredForms.length} forms successfully.`);
+        }
+
+        // Allow Enter key to trigger search in any input field
+        document.querySelectorAll('input, select').forEach(element => {
+            element.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    searchForms();
+                }
+            });
+        });
+
+        // Auto-focus on first input
+        document.getElementById('searchEmployeeName').focus();
+    </script>
+</body>
+</html>
