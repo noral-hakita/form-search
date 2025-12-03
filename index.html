@@ -53,7 +53,7 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1800px;
             margin: 0 auto;
             background-color: var(--form-bg);
             padding: 30px;
@@ -263,17 +263,17 @@
 
         .details-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 15px;
             margin-bottom: 20px;
         }
 
         .detail-group {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .detail-label {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--gray);
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -281,7 +281,7 @@
         }
 
         .detail-value {
-            font-size: 16px;
+            font-size: 14px;
             color: var(--text-color);
             font-weight: 500;
             padding: 8px 12px;
@@ -482,87 +482,75 @@
             
             <div class="search-grid">
                 <div class="form-group">
-                    <label><i class="fas fa-user-tie"></i> Employee Name</label>
-                    <input type="text" id="searchEmployeeName" placeholder="Enter employee name">
-                </div>
-                
-                <div class="form-group">
-                    <label><i class="fas fa-building"></i> Company Name</label>
-                    <input type="text" id="searchCompanyName" placeholder="Enter company name">
-                </div>
-                
-                <div class="form-group">
-                    <label><i class="fas fa-map-marker-alt"></i> City</label>
-                    <select id="searchCity">
-                        <option value="">All Cities</option>
-                        <option value="KHI">Karachi (KHI)</option>
-                        <option value="LHR">Lahore (LHR)</option>
-                        <option value="ISB">Islamabad (ISB)</option>
-                        <option value="HYD">Hyderabad (HYD)</option>
-                        <option value="MULTAN">Multan</option>
-                        <option value="FSD">Faisalabad (FSD)</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label><i class="fas fa-location-dot"></i> Area</label>
-                    <input type="text" id="searchArea" placeholder="Enter area">
-                </div>
-                
-                <div class="form-group">
-                    <label><i class="fas fa-calendar"></i> Month</label>
+                    <label><i class="fas fa-calendar"></i> MONTH</label>
                     <select id="searchMonth">
                         <option value="">All Months</option>
-                        <option value="January">January</option>
-                        <option value="February">February</option>
-                        <option value="March">March</option>
-                        <option value="April">April</option>
-                        <option value="May">May</option>
-                        <option value="June">June</option>
-                        <option value="July">July</option>
-                        <option value="August">August</option>
-                        <option value="September">September</option>
-                        <option value="October">October</option>
-                        <option value="November">November</option>
-                        <option value="December">December</option>
+                        <option value="JAN">JAN</option>
+                        <option value="FEB">FEB</option>
+                        <option value="APR">APR</option>
+                        <option value="MAY">MAY</option>
+                        <option value="JUN">JUN</option>
+                        <option value="JUL">JUL</option>
+                        <option value="AUG">AUG</option>
+                        <option value="SEP">SEP</option>
+                        <option value="OCT">OCT</option>
+                        <option value="NOV">NOV</option>
+                        <option value="DEC">DEC</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label><i class="fas fa-briefcase"></i> Business Type</label>
-                    <select id="searchBusinessType">
-                        <option value="">All Business Types</option>
-                        <option value="general">General Store</option>
-                        <option value="mobile">Mobile Accessories</option>
-                        <option value="medical">Medical Store</option>
-                        <option value="garments">Garments</option>
-                        <option value="grocery">Grocery Store</option>
-                        <option value="hair">Hair Cutting</option>
-                        <option value="electronics">Electronics</option>
-                        <option value="restaurant">Restaurant</option>
-                        <option value="other">Other</option>
+                    <label><i class="fas fa-tag"></i> CATEGORY</label>
+                    <select id="searchCategory">
+                        <option value="">All Categories</option>
+                        <option value="MOBILE SHOP & COMMUNICATION">MOBILE SHOP & COMMUNICATION</option>
+                        <option value="EATERIES/RESTAURANT">EATERIES/RESTAURANT</option>
+                        <option value="TAILOR">TAILOR</option>
+                        <option value="ELECTRIC SHOP">ELECTRIC SHOP</option>
+                        <option value="CLOTHING / GARMENTS">CLOTHING / GARMENTS</option>
+                        <!-- More options can be added here later -->
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label><i class="fas fa-tag"></i> Company Type</label>
-                    <select id="searchCompanyType">
-                        <option value="">All Company Types</option>
-                        <option value="individual">Individual</option>
-                        <option value="proprietor">Proprietor</option>
-                        <option value="private">Private Ltd.</option>
-                        <option value="partnership">Partnership</option>
+                    <label><i class="fas fa-map-marker-alt"></i> LOCATION</label>
+                    <select id="searchLocation">
+                        <option value="">All Locations</option>
+                        <option value="GULISTAN-E-JOUHAR">GULISTAN-E-JOUHAR</option>
+                        <option value="PECHS">PECHS</option>
+                        <option value="MALIR">MALIR</option>
+                        <option value="LANDHI">LANDHI</option>
+                        <option value="KORANGI">KORANGI</option>
+                        <option value="F.B AREA">F.B AREA</option>
+                        <!-- More options can be added here later -->
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label><i class="fas fa-store"></i> Shop Type</label>
-                    <select id="searchShopType">
-                        <option value="">All Shop Types</option>
-                        <option value="shop">Shop</option>
-                        <option value="mart">Mart</option>
-                        <option value="stall">Stall / Cabin</option>
-                        <option value="cart">Cart</option>
+                    <label><i class="fas fa-university"></i> BANK</label>
+                    <select id="searchBank">
+                        <option value="">All Banks</option>
+                        <option value="HBL">HBL</option>
+                        <option value="EASYPAISA">EASYPAISA</option>
+                        <option value="JAZZ CASH">JAZZ CASH</option>
+                        <option value="UBL">UBL</option>
+                        <option value="BAHL">BAHL</option>
+                        <option value="HMB">HMB</option>
+                        <option value="DIBL">DIBL</option>
+                        <option value="FBL">FBL</option>
+                        <!-- More options can be added here later -->
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-check-circle"></i> STATUS-2</label>
+                    <select id="searchStatus">
+                        <option value="">All Status</option>
+                        <option value="DEPLOYED">DEPLOYED</option>
+                        <option value="CLOSED">CLOSED</option>
+                        <option value="SENT FOR PRINTING">SENT FOR PRINTING</option>
+                        <option value="IBAN RECEIVED">IBAN RECEIVED</option>
+                        <!-- More options can be added here later -->
                     </select>
                 </div>
             </div>
@@ -636,14 +624,11 @@
 
         async function searchForms() {
             const searchCriteria = {
-                employeeName: document.getElementById('searchEmployeeName').value.trim(),
-                companyName: document.getElementById('searchCompanyName').value.trim(),
-                city: document.getElementById('searchCity').value,
-                area: document.getElementById('searchArea').value.trim(),
                 month: document.getElementById('searchMonth').value,
-                businessType: document.getElementById('searchBusinessType').value,
-                companyType: document.getElementById('searchCompanyType').value,
-                shopType: document.getElementById('searchShopType').value,
+                category: document.getElementById('searchCategory').value,
+                location: document.getElementById('searchLocation').value,
+                bank: document.getElementById('searchBank').value,
+                status: document.getElementById('searchStatus').value,
                 action: 'search'
             };
 
@@ -720,17 +705,17 @@
             }
             
             pageForms.forEach((form, index) => {
-                console.log(`Creating card for form ${index}:`, form.employeeName);
+                console.log(`Creating card for form ${index}:`, form.merchantName || form.ownerName);
                 
                 const card = document.createElement('div');
                 card.className = 'form-card';
                 
-                // Format timestamp
-                let formDate = 'N/A';
-                if (form.timestamp) {
+                // Format MAF Date
+                let mafDate = 'N/A';
+                if (form.mafDate) {
                     try {
-                        const date = new Date(form.timestamp);
-                        formDate = date.toLocaleDateString('en-US', {
+                        const date = new Date(form.mafDate);
+                        mafDate = date.toLocaleDateString('en-US', {
                             year: 'numeric',
                             month: 'long',
                             day: 'numeric'
@@ -740,98 +725,144 @@
                     }
                 }
                 
-                // Determine month from timestamp if not explicitly provided
-                let formMonth = form.month || 'N/A';
-                if (!form.month && form.timestamp) {
-                    try {
-                        const date = new Date(form.timestamp);
-                        formMonth = date.toLocaleDateString('en-US', { month: 'long' });
-                    } catch (e) {
-                        // Ignore error
-                    }
-                }
-                
                 card.innerHTML = `
                     <div class="card-header">
                         <div>
-                            <h3 style="margin: 0; color: var(--secondary);">${form.companyName || 'Unnamed Company'}</h3>
-                            <div class="form-date">Submitted: ${formDate}</div>
+                            <h3 style="margin: 0; color: var(--secondary);">${form.merchantName || 'Unnamed Merchant'}</h3>
+                            <div class="form-date">MAF Date: ${mafDate}</div>
                         </div>
-                        <div class="form-id">Form #${startIndex + index + 1}</div>
+                        <div class="form-id">S.NO: ${startIndex + index + 1}</div>
                     </div>
                     
                     <div class="details-grid">
                         <div class="detail-group">
-                            <div class="detail-label">Employee Name</div>
-                            <div class="detail-value">${form.employeeName || 'N/A'}</div>
+                            <div class="detail-label">MAF DATE</div>
+                            <div class="detail-value">${form.mafDate || 'N/A'}</div>
                         </div>
                         
                         <div class="detail-group">
-                            <div class="detail-label">Brand Name</div>
-                            <div class="detail-value">${form.brandName || 'N/A'}</div>
+                            <div class="detail-label">MONTH</div>
+                            <div class="detail-value">${form.month || 'N/A'}</div>
                         </div>
                         
                         <div class="detail-group">
-                            <div class="detail-label">Location</div>
-                            <div class="detail-value">${form.area || 'N/A'}, ${form.city || 'N/A'}</div>
+                            <div class="detail-label">SALES PERSON</div>
+                            <div class="detail-value">${form.salesPerson || 'N/A'}</div>
                         </div>
                         
                         <div class="detail-group">
-                            <div class="detail-label">Month</div>
-                            <div class="detail-value">${formMonth}</div>
+                            <div class="detail-label">MERCHANT NAME</div>
+                            <div class="detail-value">${form.merchantName || form.ownerName || 'N/A'}</div>
                         </div>
                         
                         <div class="detail-group">
-                            <div class="detail-label">Shop Type</div>
-                            <div class="detail-value">${form.shopType || 'N/A'}</div>
+                            <div class="detail-label">CATEGORY</div>
+                            <div class="detail-value">${form.category || 'N/A'}</div>
                         </div>
                         
                         <div class="detail-group">
-                            <div class="detail-label">Applicant Name</div>
-                            <div class="detail-value">${form.applicantName || 'N/A'}</div>
+                            <div class="detail-label">LOCATION</div>
+                            <div class="detail-value">${form.location || 'N/A'}</div>
                         </div>
                         
                         <div class="detail-group">
-                            <div class="detail-label">Mobile Number</div>
-                            <div class="detail-value">${form.mobileNumber || 'N/A'}</div>
+                            <div class="detail-label">TEAM</div>
+                            <div class="detail-value">${form.team || 'N/A'}</div>
                         </div>
                         
                         <div class="detail-group">
-                            <div class="detail-label">CNIC #</div>
-                            <div class="detail-value">${form.cnic || 'N/A'}</div>
+                            <div class="detail-label">STANDEE TYPE</div>
+                            <div class="detail-value">${form.standeeType || 'N/A'}</div>
                         </div>
                         
                         <div class="detail-group">
-                            <div class="detail-label">Company Type</div>
-                            <div class="detail-value">${form.companyType || 'N/A'}</div>
+                            <div class="detail-label">OWNER NAME</div>
+                            <div class="detail-value">${form.ownerName || form.merchantName || 'N/A'}</div>
                         </div>
                         
                         <div class="detail-group">
-                            <div class="detail-label">Business Type</div>
-                            <div class="detail-value">${form.businessType || 'N/A'}</div>
+                            <div class="detail-label">FATHER NAME</div>
+                            <div class="detail-value">${form.fatherName || 'N/A'}</div>
                         </div>
                         
                         <div class="detail-group">
-                            <div class="detail-label">Bank Name</div>
-                            <div class="detail-value">${form.bankName || 'N/A'}</div>
+                            <div class="detail-label">ADDRESS</div>
+                            <div class="detail-value">${form.address || 'N/A'}</div>
                         </div>
                         
                         <div class="detail-group">
-                            <div class="detail-label">Account Number</div>
-                            <div class="detail-value">${form.accountNumber || 'N/A'}</div>
+                            <div class="detail-label">DOB</div>
+                            <div class="detail-value">${form.dob || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">CNIC NO</div>
+                            <div class="detail-value">${form.cnicNo || form.cnic || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">PHONE NUMBER</div>
+                            <div class="detail-value">${form.phoneNumber || form.mobileNumber || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">BANK NAME</div>
+                            <div class="detail-value">${form.bankName || form.bank || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">IBAN NUMBER</div>
+                            <div class="detail-value">${form.ibanNumber || form.iban || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">IBAN RECEIVED DATE</div>
+                            <div class="detail-value">${form.ibanReceivedDate || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">CONVERTED TO UBL/FAYSAL</div>
+                            <div class="detail-value">${form.convertedTo || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">ACCOUNT TITLE</div>
+                            <div class="detail-value">${form.accountTitle || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">REMARKS</div>
+                            <div class="detail-value">${form.remarks || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">STATUS-2</div>
+                            <div class="detail-value">${form.status2 || form.status || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">WHATSAPP/ORIGINAL</div>
+                            <div class="detail-value">${form.whatsappOriginal || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">COMMENTS</div>
+                            <div class="detail-value">${form.comments || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">HAND OVER TO SALES STAFF</div>
+                            <div class="detail-value">${form.handOverToSalesStaff || 'N/A'}</div>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <div class="detail-label">FBL REFERENCE ID</div>
+                            <div class="detail-value">${form.fblReferenceId || form.referalID || 'N/A'}</div>
                         </div>
                     </div>
-                    
-                    ${form.Qr ? `
-                    <div class="qr-info">
-                        <div class="qr-label"><i class="fas fa-qrcode"></i> QR Information</div>
-                        <div>${form.Qr || 'No QR information'}</div>
-                    </div>
-                    ` : ''}
                     
                     <div style="margin-top: 15px; font-size: 12px; color: var(--gray);">
-                        <i class="fas fa-info-circle"></i> Referral ID: ${form.referalID || 'N/A'} | 
-                        Email: ${form.email || 'N/A'}
+                        <i class="fas fa-info-circle"></i> Last Updated: ${form.timestamp || 'N/A'}
                     </div>
                 `;
                 resultsList.appendChild(card);
@@ -923,14 +954,11 @@
         }
 
         function resetFilters() {
-            document.getElementById('searchEmployeeName').value = '';
-            document.getElementById('searchCompanyName').value = '';
-            document.getElementById('searchCity').value = '';
-            document.getElementById('searchArea').value = '';
             document.getElementById('searchMonth').value = '';
-            document.getElementById('searchBusinessType').value = '';
-            document.getElementById('searchCompanyType').value = '';
-            document.getElementById('searchShopType').value = '';
+            document.getElementById('searchCategory').value = '';
+            document.getElementById('searchLocation').value = '';
+            document.getElementById('searchBank').value = '';
+            document.getElementById('searchStatus').value = '';
             
             document.getElementById('resultsContainer').style.display = 'none';
             allForms = [];
@@ -947,28 +975,43 @@
                 return;
             }
             
-            // Convert to CSV
+            // Convert to CSV with new column headers
             const headers = [
-                'Employee Name', 'Company Name', 'Brand Name', 'City', 'Area', 
-                'Month', 'Applicant Name', 'Mobile Number', 'CNIC', 'Business Type',
-                'Company Type', 'Bank Name', 'Account Number', 'QR Info', 'Timestamp'
+                'S.NO', 'MAF DATE', 'MONTH', 'SALES PERSON', 'MERCHANT NAME',
+                'CATEGORY', 'LOCATION', 'TEAM', 'STANDEE TYPE', 'OWNER NAME',
+                'FATHER NAME', 'ADDRESS', 'DOB', 'CNIC NO', 'PHONE NUMBER',
+                'BANK NAME', 'IBAN NUMBER', 'IBAN RECEIVED DATE', 'CONVERTED TO UBL/FAYSAL',
+                'ACCOUNT TITLE', 'REMARKS', 'STATUS-2', 'WHATSAPP/ORIGINAL', 'COMMENTS',
+                'HAND OVER TO SALES STAFF', 'FBL REFERENCE ID', 'TIMESTAMP'
             ];
             
-            const csvData = filteredForms.map(form => [
-                form.employeeName || '',
-                form.companyName || '',
-                form.brandName || '',
-                form.city || '',
-                form.area || '',
+            const csvData = filteredForms.map((form, index) => [
+                index + 1,
+                form.mafDate || '',
                 form.month || '',
-                form.applicantName || '',
-                form.mobileNumber || '',
-                form.cnic || '',
-                form.businessType || '',
-                form.companyType || '',
-                form.bankName || '',
-                form.accountNumber || '',
-                form.Qr || '',
+                form.salesPerson || '',
+                form.merchantName || '',
+                form.category || '',
+                form.location || '',
+                form.team || '',
+                form.standeeType || '',
+                form.ownerName || '',
+                form.fatherName || '',
+                form.address || '',
+                form.dob || '',
+                form.cnicNo || form.cnic || '',
+                form.phoneNumber || form.mobileNumber || '',
+                form.bankName || form.bank || '',
+                form.ibanNumber || form.iban || '',
+                form.ibanReceivedDate || '',
+                form.convertedTo || '',
+                form.accountTitle || '',
+                form.remarks || '',
+                form.status2 || form.status || '',
+                form.whatsappOriginal || '',
+                form.comments || '',
+                form.handOverToSalesStaff || '',
+                form.fblReferenceId || form.referalID || '',
                 form.timestamp || ''
             ]);
             
@@ -1001,9 +1044,6 @@
                 }
             });
         });
-
-        // Auto-focus on first input
-        document.getElementById('searchEmployeeName').focus();
         
         console.log('Webpage JavaScript loaded successfully');
     </script>
