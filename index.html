@@ -38,6 +38,180 @@
             --gray: #bdc3c7;
         }
 
+        body.admaa-theme {
+            --bg-color: #FFD700; /* Golden yellow background */
+            --form-bg: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffcc00' fill-opacity='0.3' fill-rule='evenodd'/%3E%3C/svg%3E"), linear-gradient(135deg, #FFD700 0%, #FFC400 100%); /* Honeycomb pattern */
+            --text-color: #333333;
+            --section-bg: rgba(255, 215, 0, 0.7); /* Semi-transparent golden */
+            --section-border: #FFD700;
+            --input-bg: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+            --input-border: #FF0000; /* Red borders */
+            --border: #FF0000; /* Red borders */
+            --primary: #FF0000; /* Red for primary elements */
+            --primary-dark: #CC0000;
+            --secondary: #008000; /* Green for secondary elements */
+            --accent: #FF4500;
+            --success: #008000; /* Green success */
+            --gray: #666666;
+            --light: #FFFAF0;
+            --shadow: 0 4px 15px rgba(255, 0, 0, 0.2);
+        }
+
+        /* Special ADMAA theme border styles */
+        body.admaa-theme .container {
+            border: 2px solid #FF0000;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+            background: var(--form-bg);
+        }
+
+        body.admaa-theme .search-panel {
+            border: 2px solid #FF0000;
+            border-left: 4px solid #008000; /* Green accent */
+            background: rgba(255, 215, 0, 0.8); /* Golden background with transparency */
+            backdrop-filter: blur(5px);
+        }
+
+        body.admaa-theme .form-card {
+            border: 2px solid #FF0000;
+            border-left: 4px solid #008000; /* Green accent */
+            background: rgba(255, 215, 0, 0.8); /* Golden background with transparency */
+            backdrop-filter: blur(5px);
+        }
+
+        body.admaa-theme input,
+        body.admaa-theme select,
+        body.admaa-theme .search-input,
+        body.admaa-theme .dropdown-options {
+            border: 2px solid #FF0000;
+            background: rgba(255, 255, 255, 0.95); /* More opaque white for inputs */
+        }
+
+        body.admaa-theme input:focus,
+        body.admaa-theme select:focus,
+        body.admaa-theme .search-input:focus {
+            border-color: #008000; /* Green on focus */
+            box-shadow: 0 0 0 3px rgba(0, 128, 0, 0.2);
+            background: rgba(255, 255, 255, 1); /* Full white on focus */
+        }
+
+        body.admaa-theme .dropdown-options {
+            background: rgba(255, 255, 255, 0.98); /* Almost full white for dropdown */
+            backdrop-filter: blur(10px);
+        }
+
+        body.admaa-theme .dropdown-option:hover {
+            background-color: #FF0000;
+            color: white;
+        }
+
+        body.admaa-theme .dropdown-option.selected {
+            background-color: #008000;
+            color: white;
+        }
+
+        body.admaa-theme .btn-primary {
+            background: linear-gradient(135deg, #FF0000, #CC0000);
+            border: 2px solid #008000;
+        }
+
+        body.admaa-theme .btn-primary:hover {
+            background: linear-gradient(135deg, #CC0000, #990000);
+            border-color: #FF0000;
+        }
+
+        body.admaa-theme .btn-success {
+            background: linear-gradient(135deg, #008000, #006400);
+            border: 2px solid #FF0000;
+        }
+
+        body.admaa-theme .btn-success:hover {
+            background: linear-gradient(135deg, #006400, #004d00);
+        }
+
+        body.admaa-theme .btn-secondary {
+            background: linear-gradient(135deg, #666666, #4d4d4d);
+            border: 2px solid #FF0000;
+        }
+
+        body.admaa-theme .form-id {
+            background: #FF0000;
+            color: white;
+            border: 2px solid #008000;
+        }
+
+        body.admaa-theme .detail-value {
+            border: 2px solid #FF0000;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        body.admaa-theme .pagination-btn {
+            border: 2px solid #FF0000;
+            background: linear-gradient(135deg, #FF0000, #CC0000);
+        }
+
+        body.admaa-theme .pagination-btn:hover:not(:disabled) {
+            background: linear-gradient(135deg, #CC0000, #990000);
+        }
+
+        body.admaa-theme .pagination-btn:disabled {
+            background: linear-gradient(135deg, #666666, #4d4d4d);
+            opacity: 0.7;
+        }
+
+        body.admaa-theme .footer {
+            border-top: 2px solid #FF0000;
+            background: rgba(255, 215, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        body.admaa-theme .results-header {
+            border-bottom: 2px solid #FF0000;
+        }
+
+        body.admaa-theme .section-title {
+            color: #008000; /* Green section titles */
+        }
+
+        body.admaa-theme .pagination {
+            border-top: 2px solid #FF0000;
+        }
+
+        body.admaa-theme .card-header {
+            border-bottom: 2px solid #FF0000;
+        }
+
+        body.admaa-theme .qr-info {
+            border: 2px solid #FF0000;
+            border-left: 4px solid #008000;
+            background: rgba(255, 215, 0, 0.9);
+            backdrop-filter: blur(5px);
+        }
+
+        body.admaa-theme .results-container {
+            background: rgba(255, 215, 0, 0.8);
+            backdrop-filter: blur(5px);
+            border-radius: 8px;
+            padding: 20px;
+            border: 2px solid #FF0000;
+        }
+
+        body.admaa-theme .header {
+            border-bottom: 2px solid #FF0000;
+            background: rgba(255, 215, 0, 0.8);
+            backdrop-filter: blur(5px);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        body.admaa-theme .form-header {
+            background: rgba(255, 215, 0, 0.8);
+            backdrop-filter: blur(5px);
+            border-radius: 8px;
+            padding: 15px;
+            border: 2px solid #FF0000;
+        }
+
         * {
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -59,7 +233,7 @@
             padding: 30px;
             border-radius: 12px;
             box-shadow: var(--shadow);
-            transition: background-color 0.3s, box-shadow 0.3s;
+            transition: background-color 0.3s, box-shadow 0.3s, border 0.3s;
         }
 
         .form-header {
@@ -73,6 +247,18 @@
             font-weight: bold;
             font-size: 1.8rem;
             color: var(--primary);
+            transition: color 0.3s;
+        }
+
+        /* ADMAA theme specific logo styling */
+        body.admaa-theme .logo {
+            color: #FF0000 !important;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: 900;
+            background: linear-gradient(45deg, #FF0000, #CC0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .header {
@@ -94,6 +280,10 @@
              color: var(--light);
         }
 
+        body.admaa-theme h1 {
+            color: #008000; /* Green for main heading */
+        }
+
         .subtitle {
             color: var(--gray);
             font-size: 1rem;
@@ -108,6 +298,7 @@
             margin-bottom: 30px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             border-left: 4px solid var(--primary);
+            transition: border 0.3s;
         }
 
         .search-grid {
@@ -119,6 +310,7 @@
 
         .form-group {
             margin-bottom: 0;
+            position: relative;
         }
 
         label {
@@ -131,6 +323,11 @@
         
         body.dark-theme label {
              color: var(--gray);
+        }
+
+        body.admaa-theme label {
+            color: #008000; /* Green labels */
+            font-weight: 600;
         }
 
         input[type="text"], input[type="date"], select {
@@ -152,6 +349,61 @@
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        /* Searchable dropdown styles */
+        .searchable-select {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--input-border);
+            border-radius: 6px;
+            margin-bottom: 5px;
+            font-size: 14px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        .dropdown-options {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--input-bg);
+            position: absolute;
+            width: 100%;
+            z-index: 100;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .dropdown-options.show {
+            display: block;
+        }
+
+        .dropdown-option {
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .dropdown-option:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .dropdown-option.selected {
+            background-color: var(--primary-dark);
+            color: white;
         }
 
         .button-group {
@@ -230,7 +482,7 @@
             margin-bottom: 20px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.05);
             border-left: 4px solid var(--success);
-            transition: transform 0.3s;
+            transition: transform 0.3s, border 0.3s;
         }
 
         .form-card:hover {
@@ -278,6 +530,11 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 5px;
+        }
+
+        body.admaa-theme .detail-label {
+            color: #008000; /* Green detail labels */
+            font-weight: 600;
         }
 
         .detail-value {
@@ -366,6 +623,11 @@
             margin: 0 auto 20px;
         }
 
+        body.admaa-theme .spinner {
+            border: 4px solid #FFD700;
+            border-top: 4px solid #FF0000;
+        }
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -393,6 +655,9 @@
             font-size: 14px;
             font-weight: 500;
             transition: background-color 0.3s, color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         #theme-toggle:hover {
@@ -481,6 +746,7 @@
             </div>
             
             <div class="search-grid">
+                <!-- Form fields remain the same -->
                 <div class="form-group">
                     <label><i class="fas fa-calendar"></i> MONTH</label>
                     <select id="searchMonth">
@@ -500,151 +766,216 @@
                 </div>
                 
                 <div class="form-group">
-                    <label><i class="fas fa-tag"></i> CATEGORY</label>
-                    <select id="searchCategory">
-                        <option value="">All Categories</option>
-                        <option value="A/C TECHNICIAN">A/C TECHNICIAN</option>
-                        <option value="ACCESSORIES">ACCESSORIES</option>
-                        <option value="ALUMINIUM & GLASS">ALUMINIUM & GLASS</option>
-                        <option value="ART GALLERY">ART GALLERY</option>
-                        <option value="AUTOMOBILE">AUTOMOBILE</option>
-                        <option value="AUTO SPARE PARTS">AUTO SPARE PARTS</option>
-                        <option value="BAKERS">BAKERS</option>
-                        <option value="BANGAL SHOP">BANGAL SHOP</option>
-                        <option value="BATTERY SHOP">BATTERY SHOP</option>
-                        <option value="BEAUTY PARLOR">BEAUTY PARLOR</option>
-                        <option value="BEDSHEET">BEDSHEET</option>
-                        <option value="BEVERAGES">BEVERAGES</option>
-                        <option value="BIKE SHOWROOM">BIKE SHOWROOM</option>
-                        <option value="BIRTHDAY CELEBRATION">BIRTHDAY CELEBRATION</option>
-                        <option value="BLOCK WORKS">BLOCK WORKS</option>
-                        <option value="BOOK SHOP">BOOK SHOP</option>
-                        <option value="BOUTIQUE">BOUTIQUE</option>
-                        <option value="BROKER AGENT">BROKER AGENT</option>
-                        <option value="CANTEEN">CANTEEN</option>
-                        <option value="CAR ACCESSORIES">CAR ACCESSORIES</option>
-                        <option value="CAR PARKING">CAR PARKING</option>
-                        <option value="CAR SHOWROOM">CAR SHOWROOM</option>
-                        <option value="CARPENTER SHOP">CARPENTER SHOP</option>
-                        <option value="CAR WASH">CAR WASH</option>
-                        <option value="CATERING">CATERING</option>
-                        <option value="CATTLE FARM">CATTLE FARM</option>
-                        <option value="CD SHOP">CD SHOP</option>
-                        <option value="CEMENT DEPOT">CEMENT DEPOT</option>
-                        <option value="CHAPATI STALL">CHAPATI STALL</option>
-                        <option value="CHICKEN / MEAT SHOP">CHICKEN / MEAT SHOP</option>
-                        <option value="CLEANER">CLEANER</option>
-                        <option value="CLINIC">CLINIC</option>
-                        <option value="CLOTHING / GARMENTS">CLOTHING / GARMENTS</option>
-                        <option value="COBBLER">COBBLER</option>
-                        <option value="COLD SHOP">COLD SHOP</option>
-                        <option value="COMPUTER SHOP">COMPUTER SHOP</option>
-                        <option value="COSMETICS">COSMETICS</option>
-                        <option value="COURIER SERVICE">COURIER SERVICE</option>
-                        <option value="CROCKERY STORE">CROCKERY STORE</option>
-                        <option value="CTC INCHARGE">CTC INCHARGE</option>
-                        <option value="CURTAIN SHOP">CURTAIN SHOP</option>
-                        <option value="CUSHION MAKER">CUSHION MAKER</option>
-                        <option value="CYCLE SHOP">CYCLE SHOP</option>
-                        <option value="DAIRY SHOP">DAIRY SHOP</option>
-                        <option value="DARAZ HOUSE">DARAZ HOUSE</option>
-                        <option value="DENTIST">DENTIST</option>
-                        <option value="DESERT SHOP">DESERT SHOP</option>
-                        <option value="DESIGNER">DESIGNER</option>
-                        <option value="DIAPER STORE">DIAPER STORE</option>
-                        <option value="DISTRIBUTOR">DISTRIBUTOR</option>
-                        <option value="DRIVER">DRIVER</option>
-                        <option value="DRIVING SCHOOL">DRIVING SCHOOL</option>
-                        <option value="DRY CLEANER">DRY CLEANER</option>
-                        <option value="DRY FRUIT SHOP">DRY FRUIT SHOP</option>
-                        <option value="DYNG CENTER">DYNG CENTER</option>
-                        <option value="EATERIES/RESTAURANT">EATERIES/RESTAURANT</option>
-                        <option value="ELECTRIC SHOP">ELECTRIC SHOP</option>
-                        <option value="ESTATE AGENCY">ESTATE AGENCY</option>
-                        <option value="EVENT PLANNER">EVENT PLANNER</option>
-                        <option value="FANCY LIGHTS">FANCY LIGHTS</option>
-                        <option value="FLOWER SHOP">FLOWER SHOP</option>
-                        <option value="FOAM">FOAM</option>
-                        <option value="FOOTBALL CLUB">FOOTBALL CLUB</option>
-                        <option value="FRUIT/VEGETABLE SHOP">FRUIT/VEGETABLE SHOP</option>
-                        <option value="FURNITURE SHOWROOM">FURNITURE SHOWROOM</option>
-                        <option value="GARDENER">GARDENER</option>
-                        <option value="GAS SHOP">GAS SHOP</option>
-                        <option value="GENERAL STORE">GENERAL STORE</option>
-                        <option value="GENERATOR SHOP">GENERATOR SHOP</option>
-                        <option value="GIFT SHOP">GIFT SHOP</option>
-                        <option value="GLASS SHOP">GLASS SHOP</option>
-                        <option value="GYM">GYM</option>
-                        <option value="HAND EMBROIDERY">HAND EMBROIDERY</option>
-                        <option value="HARDWARE SHOP">HARDWARE SHOP</option>
-                        <option value="HOMEOPATHIC">HOMEOPATHIC</option>
-                        <option value="HOTEL">HOTEL</option>
-                        <option value="HOUSE HOLD">HOUSE HOLD</option>
-                        <option value="ICE CREAM SHOP / JUICE CENTER">ICE CREAM SHOP / JUICE CENTER</option>
-                        <option value="ICE DEPOT">ICE DEPOT</option>
-                        <option value="IMPORT EXPORT">IMPORT EXPORT</option>
-                        <option value="INTERIOR DESIGNER">INTERIOR DESIGNER</option>
-                        <option value="JEWELLERY SHOP">JEWELLERY SHOP</option>
-                        <option value="KEY MAKER">KEY MAKER</option>
-                        <option value="LABOUR">LABOUR</option>
-                        <option value="LAW FIRM">LAW FIRM</option>
-                        <option value="MARBLE STORE">MARBLE STORE</option>
-                        <option value="MARKETING">MARKETING</option>
-                        <option value="MARRIAGE BUREAU">MARRIAGE BUREAU</option>
-                        <option value="MART">MART</option>
-                        <option value="MEDICAL STORE">MEDICAL STORE</option>
-                        <option value="MOBILE ACCESSORIES">MOBILE ACCESSORIES</option>
-                        <option value="MOBILE REPAIR">MOBILE REPAIR</option>
-                        <option value="MOBILE SHOP">MOBILE SHOP</option>
-                        <option value="MOBILE SHOP & COMMUNICATION">MOBILE SHOP & COMMUNICATION</option>
-                        <option value="NET SERVICE PROVIDER">NET SERVICE PROVIDER</option>
-                        <option value="OIL DEPOT">OIL DEPOT</option>
-                        <option value="ONLINE MARKETING">ONLINE MARKETING</option>
-                        <option value="OPTICS">OPTICS</option>
-                        <option value="PAINT SHOP">PAINT SHOP</option>
-                        <option value="PAN SHOP">PAN SHOP</option>
-                        <option value="PARCEL DELIVERY ONLINE">PARCEL DELIVERY ONLINE</option>
-                        <option value="PERFUME SHOP">PERFUME SHOP</option>
-                        <option value="PET SHOP">PET SHOP</option>
-                        <option value="PHOTOGRAPHER">PHOTOGRAPHER</option>
-                        <option value="PHOTOSTATE SHOP">PHOTOSTATE SHOP</option>
-                        <option value="PICO SHOP">PICO SHOP</option>
-                        <option value="POLICE OFFICER">POLICE OFFICER</option>
-                        <option value="PRINTING">PRINTING</option>
-                        <option value="PUNCTURE SHOP">PUNCTURE SHOP</option>
-                        <option value="REPARING">REPARING</option>
-                        <option value="RENT A CAR">RENT A CAR</option>
-                        <option value="RICKSHAW DRIVER">RICKSHAW DRIVER</option>
-                        <option value="RIDER">RIDER</option>
-                        <option value="SALE PURCHASE & REPAIR">SALE PURCHASE & REPAIR</option>
-                        <option value="SALON">SALON</option>
-                        <option value="SANITARY SHOP">SANITARY SHOP</option>
-                        <option value="SCRAP">SCRAP</option>
-                        <option value="SERVICE PROVIDER">SERVICE PROVIDER</option>
-                        <option value="SHOE SHOP">SHOE SHOP</option>
-                        <option value="SILAI MACHINE SHOP">SILAI MACHINE SHOP</option>
-                        <option value="SIM STALL">SIM STALL</option>
-                        <option value="SNOOKER CLUB">SNOOKER CLUB</option>
-                        <option value="SOFA REPAIR">SOFA REPAIR</option>
-                        <option value="SOLAR">SOLAR</option>
-                        <option value="SPORTS SHOP">SPORTS SHOP</option>
-                        <option value="STATIONARY">STATIONARY</option>
-                        <option value="TAILOR">TAILOR</option>
-                        <option value="TEACHER">TEACHER</option>
-                        <option value="TOY SHOP">TOY SHOP</option>
-                        <option value="TRADERS">TRADERS</option>
-                        <option value="TRAVEL AGENCY">TRAVEL AGENCY</option>
-                        <option value="TYRE SHOP">TYRE SHOP</option>
-                        <option value="UNION HOLDER">UNION HOLDER</option>
-                        <option value="VAPE SHOP">VAPE SHOP</option>
-                        <option value="WAITER">WAITER</option>
-                        <option value="WATCH SHOP">WATCH SHOP</option>
-                        <option value="WATER PLANT">WATER PLANT</option>
-                        <option value="WELDING SHOP">WELDING SHOP</option>
-                        <option value="WOOD SHOP">WOOD SHOP</option>
-                        <option value="WORK SHOP">WORK SHOP</option>
-                        <!-- More options can be added here later -->
+                    <label><i class="fas fa-user-tie"></i> EMPLOYEE NAME</label>
+                    <select id="searchEmployee">
+                        <option value="">All Employees</option>
+                        <option value="ABDUL REHMAN">ABDUL REHMAN</option>
+                        <option value="ABDUL WAHID">ABDUL WAHID</option>
+                        <option value="ADEEL ALI">ADEEL ALI</option>
+                        <option value="AHMED SAEED">AHMED SAEED</option>
+                        <option value="AMIR">AMIR</option>
+                        <option value="ANWAR UL HAQ">ANWAR UL HAQ</option>
+                        <option value="AQEEL ABBAS">AQEEL ABBAS</option>
+                        <option value="ARSALAN">ARSALAN</option>
+                        <option value="ARSALAN FAROOQUI">ARSALAN FAROOQUI</option>
+                        <option value="ALI ASGHAR">ALI ASGHAR</option>
+                        <option value="BILAL">BILAL</option>
+                        <option value="CEO">CEO</option>
+                        <option value="DANIYAL HASSAN">DANIYAL HASSAN</option>
+                        <option value="EBAAD">EBAAD</option>
+                        <option value="FAHAD AHMED">FAHAD AHMED</option>
+                        <option value="FAKHIR">FAKHIR</option>
+                        <option value="HAFIZ YASEEN">HAFIZ YASEEN</option>
+                        <option value="HAMZA">HAMZA</option>
+                        <option value="HAMZA ALI">HAMZA ALI</option>
+                        <option value="HARIS KHAN">HARIS KHAN</option>
+                        <option value="HIZBULLAH KHALID">HIZBULLAH KHALID</option>
+                        <option value="IMRAN AHMED">IMRAN AHMED</option>
+                        <option value="IRFAN SHAHID">IRFAN SHAHID</option>
+                        <option value="JOHN">JOHN</option>
+                        <option value="JUNAID ALAM">JUNAID ALAM</option>
+                        <option value="KAMRAN ALI">KAMRAN ALI</option>
+                        <option value="KAREEM UDDIN">KAREEM UDDIN</option>
+                        <option value="M.SALMAN">M.SALMAN</option>
+                        <option value="M.SHABAN">M.SHABAN</option>
+                        <option value="M.SHAYAN">M.SHAYAN</option>
+                        <option value="M.SHEHROZ">M.SHEHROZ</option>
+                        <option value="M.ZUBAIR">M.ZUBAIR</option>
+                        <option value="MUBASHIR ALI">MUBASHIR ALI</option>
+                        <option value="NADEEM JABBAR">NADEEM JABBAR</option>
+                        <option value="NAEEM">NAEEM</option>
+                        <option value="MINHAJ HASSAN">MINHAJ HASSAN</option>
+                        <option value="NOMAN RASOOL">NOMAN RASOOL</option>
+                        <option value="RAZA HUSSAIN">RAZA HUSSAIN</option>
+                        <option value="REHAN ALI SHAH">REHAN ALI SHAH</option>
+                        <option value="R T">R T</option>
+                        <option value="SADIQ">SADIQ</option>
+                        <option value="SALMAN SHEIKH">SALMAN SHEIKH</option>
+                        <option value="SHAHAB MUSHARRAF">SHAHAB MUSHARRAF</option>
+                        <option value="SHAHROZ KHANZADA">SHAHROZ KHANZADA</option>
+                        <option value="SHEIKH RIZWAN">SHEIKH RIZWAN</option>
+                        <option value="SHERAZ">SHERAZ</option>
+                        <option value="SYED MUNZIR">SYED MUNZIR</option>
+                        <option value="UZAIR">UZAIR</option>
+                        <option value="WAQAR AHMED">WAQAR AHMED</option>
+                        <option value="WAQAS AHMED">WAQAS AHMED</option>
+                        <option value="YOUNUS">YOUNUS</option>
+                        <option value="ZEESHAN AJMAL">ZEESHAN AJMAL</option>
                     </select>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-user-tie"></i> EMPLOYEE NAME (Text)</label>
+                    <input type="text" id="searchEmployeeText" placeholder="Enter employee name (if not in list)">
+                </div>
+                
+                <div class="form-group searchable-select">
+                    <label><i class="fas fa-tag"></i> CATEGORY</label>
+                    <input type="text" class="search-input" id="categorySearch" placeholder="Search categories...">
+                    <div class="dropdown-options" id="categoryOptions">
+                        <div class="dropdown-option" data-value="">All Categories</div>
+                        <div class="dropdown-option" data-value="A/C TECHNICIAN">A/C TECHNICIAN</div>
+                        <div class="dropdown-option" data-value="ACCESSORIES">ACCESSORIES</div>
+                        <div class="dropdown-option" data-value="ALUMINIUM & GLASS">ALUMINIUM & GLASS</div>
+                        <div class="dropdown-option" data-value="ART GALLERY">ART GALLERY</div>
+                        <div class="dropdown-option" data-value="AUTOMOBILE">AUTOMOBILE</div>
+                        <div class="dropdown-option" data-value="AUTO SPARE PARTS">AUTO SPARE PARTS</div>
+                        <div class="dropdown-option" data-value="BAKERS">BAKERS</div>
+                        <div class="dropdown-option" data-value="BANGAL SHOP">BANGAL SHOP</div>
+                        <div class="dropdown-option" data-value="BATTERY SHOP">BATTERY SHOP</div>
+                        <div class="dropdown-option" data-value="BEAUTY PARLOR">BEAUTY PARLOR</div>
+                        <div class="dropdown-option" data-value="BEDSHEET">BEDSHEET</div>
+                        <div class="dropdown-option" data-value="BEVERAGES">BEVERAGES</div>
+                        <div class="dropdown-option" data-value="BIKE SHOWROOM">BIKE SHOWROOM</div>
+                        <div class="dropdown-option" data-value="BIRTHDAY CELEBRATION">BIRTHDAY CELEBRATION</div>
+                        <div class="dropdown-option" data-value="BLOCK WORKS">BLOCK WORKS</div>
+                        <div class="dropdown-option" data-value="BOOK SHOP">BOOK SHOP</div>
+                        <div class="dropdown-option" data-value="BOUTIQUE">BOUTIQUE</div>
+                        <div class="dropdown-option" data-value="BROKER AGENT">BROKER AGENT</div>
+                        <div class="dropdown-option" data-value="CANTEEN">CANTEEN</div>
+                        <div class="dropdown-option" data-value="CAR ACCESSORIES">CAR ACCESSORIES</div>
+                        <div class="dropdown-option" data-value="CAR PARKING">CAR PARKING</div>
+                        <div class="dropdown-option" data-value="CAR SHOWROOM">CAR SHOWROOM</div>
+                        <div class="dropdown-option" data-value="CARPENTER SHOP">CARPENTER SHOP</div>
+                        <div class="dropdown-option" data-value="CAR WASH">CAR WASH</div>
+                        <div class="dropdown-option" data-value="CATERING">CATERING</div>
+                        <div class="dropdown-option" data-value="CATTLE FARM">CATTLE FARM</div>
+                        <div class="dropdown-option" data-value="CD SHOP">CD SHOP</div>
+                        <div class="dropdown-option" data-value="CEMENT DEPOT">CEMENT DEPOT</div>
+                        <div class="dropdown-option" data-value="CHAPATI STALL">CHAPATI STALL</div>
+                        <div class="dropdown-option" data-value="CHICKEN / MEAT SHOP">CHICKEN / MEAT SHOP</div>
+                        <div class="dropdown-option" data-value="CLEANER">CLEANER</div>
+                        <div class="dropdown-option" data-value="CLINIC">CLINIC</div>
+                        <div class="dropdown-option" data-value="CLOTHING / GARMENTS">CLOTHING / GARMENTS</div>
+                        <div class="dropdown-option" data-value="COBBLER">COBBLER</div>
+                        <div class="dropdown-option" data-value="COLD SHOP">COLD SHOP</div>
+                        <div class="dropdown-option" data-value="COMPUTER SHOP">COMPUTER SHOP</div>
+                        <div class="dropdown-option" data-value="COSMETICS">COSMETICS</div>
+                        <div class="dropdown-option" data-value="COURIER SERVICE">COURIER SERVICE</div>
+                        <div class="dropdown-option" data-value="CROCKERY STORE">CROCKERY STORE</div>
+                        <div class="dropdown-option" data-value="CTC INCHARGE">CTC INCHARGE</div>
+                        <div class="dropdown-option" data-value="CURTAIN SHOP">CURTAIN SHOP</div>
+                        <div class="dropdown-option" data-value="CUSHION MAKER">CUSHION MAKER</div>
+                        <div class="dropdown-option" data-value="CYCLE SHOP">CYCLE SHOP</div>
+                        <div class="dropdown-option" data-value="DAIRY SHOP">DAIRY SHOP</div>
+                        <div class="dropdown-option" data-value="DARAZ HOUSE">DARAZ HOUSE</div>
+                        <div class="dropdown-option" data-value="DENTIST">DENTIST</div>
+                        <div class="dropdown-option" data-value="DESERT SHOP">DESERT SHOP</div>
+                        <div class="dropdown-option" data-value="DESIGNER">DESIGNER</div>
+                        <div class="dropdown-option" data-value="DIAPER STORE">DIAPER STORE</div>
+                        <div class="dropdown-option" data-value="DISTRIBUTOR">DISTRIBUTOR</div>
+                        <div class="dropdown-option" data-value="DRIVER">DRIVER</div>
+                        <div class="dropdown-option" data-value="DRIVING SCHOOL">DRIVING SCHOOL</div>
+                        <div class="dropdown-option" data-value="DRY CLEANER">DRY CLEANER</div>
+                        <div class="dropdown-option" data-value="DRY FRUIT SHOP">DRY FRUIT SHOP</div>
+                        <div class="dropdown-option" data-value="DYNG CENTER">DYNG CENTER</div>
+                        <div class="dropdown-option" data-value="EATERIES/RESTAURANT">EATERIES/RESTAURANT</div>
+                        <div class="dropdown-option" data-value="ELECTRIC SHOP">ELECTRIC SHOP</div>
+                        <div class="dropdown-option" data-value="ESTATE AGENCY">ESTATE AGENCY</div>
+                        <div class="dropdown-option" data-value="EVENT PLANNER">EVENT PLANNER</div>
+                        <div class="dropdown-option" data-value="FANCY LIGHTS">FANCY LIGHTS</div>
+                        <div class="dropdown-option" data-value="FLOWER SHOP">FLOWER SHOP</div>
+                        <div class="dropdown-option" data-value="FOAM">FOAM</div>
+                        <div class="dropdown-option" data-value="FOOTBALL CLUB">FOOTBALL CLUB</div>
+                        <div class="dropdown-option" data-value="FRUIT/VEGETABLE SHOP">FRUIT/VEGETABLE SHOP</div>
+                        <div class="dropdown-option" data-value="FURNITURE SHOWROOM">FURNITURE SHOWROOM</div>
+                        <div class="dropdown-option" data-value="GARDENER">GARDENER</div>
+                        <div class="dropdown-option" data-value="GAS SHOP">GAS SHOP</div>
+                        <div class="dropdown-option" data-value="GENERAL STORE">GENERAL STORE</div>
+                        <div class="dropdown-option" data-value="GENERATOR SHOP">GENERATOR SHOP</div>
+                        <div class="dropdown-option" data-value="GIFT SHOP">GIFT SHOP</div>
+                        <div class="dropdown-option" data-value="GLASS SHOP">GLASS SHOP</div>
+                        <div class="dropdown-option" data-value="GYM">GYM</div>
+                        <div class="dropdown-option" data-value="HAND EMBROIDERY">HAND EMBROIDERY</div>
+                        <div class="dropdown-option" data-value="HARDWARE SHOP">HARDWARE SHOP</div>
+                        <div class="dropdown-option" data-value="HOMEOPATHIC">HOMEOPATHIC</div>
+                        <div class="dropdown-option" data-value="HOTEL">HOTEL</div>
+                        <div class="dropdown-option" data-value="HOUSE HOLD">HOUSE HOLD</div>
+                        <div class="dropdown-option" data-value="ICE CREAM SHOP / JUICE CENTER">ICE CREAM SHOP / JUICE CENTER</div>
+                        <div class="dropdown-option" data-value="ICE DEPOT">ICE DEPOT</div>
+                        <div class="dropdown-option" data-value="IMPORT EXPORT">IMPORT EXPORT</div>
+                        <div class="dropdown-option" data-value="INTERIOR DESIGNER">INTERIOR DESIGNER</div>
+                        <div class="dropdown-option" data-value="JEWELLERY SHOP">JEWELLERY SHOP</div>
+                        <div class="dropdown-option" data-value="KEY MAKER">KEY MAKER</div>
+                        <div class="dropdown-option" data-value="LABOUR">LABOUR</div>
+                        <div class="dropdown-option" data-value="LAW FIRM">LAW FIRM</div>
+                        <div class="dropdown-option" data-value="MARBLE STORE">MARBLE STORE</div>
+                        <div class="dropdown-option" data-value="MARKETING">MARKETING</div>
+                        <div class="dropdown-option" data-value="MARRIAGE BUREAU">MARRIAGE BUREAU</div>
+                        <div class="dropdown-option" data-value="MART">MART</div>
+                        <div class="dropdown-option" data-value="MEDICAL STORE">MEDICAL STORE</div>
+                        <div class="dropdown-option" data-value="MOBILE ACCESSORIES">MOBILE ACCESSORIES</div>
+                        <div class="dropdown-option" data-value="MOBILE REPAIR">MOBILE REPAIR</div>
+                        <div class="dropdown-option" data-value="MOBILE SHOP">MOBILE SHOP</div>
+                        <div class="dropdown-option" data-value="MOBILE SHOP & COMMUNICATION">MOBILE SHOP & COMMUNICATION</div>
+                        <div class="dropdown-option" data-value="NET SERVICE PROVIDER">NET SERVICE PROVIDER</div>
+                        <div class="dropdown-option" data-value="OIL DEPOT">OIL DEPOT</div>
+                        <div class="dropdown-option" data-value="ONLINE MARKETING">ONLINE MARKETING</div>
+                        <div class="dropdown-option" data-value="OPTICS">OPTICS</div>
+                        <div class="dropdown-option" data-value="PAINT SHOP">PAINT SHOP</div>
+                        <div class="dropdown-option" data-value="PAN SHOP">PAN SHOP</div>
+                        <div class="dropdown-option" data-value="PARCEL DELIVERY ONLINE">PARCEL DELIVERY ONLINE</div>
+                        <div class="dropdown-option" data-value="PERFUME SHOP">PERFUME SHOP</div>
+                        <div class="dropdown-option" data-value="PET SHOP">PET SHOP</div>
+                        <div class="dropdown-option" data-value="PHOTOGRAPHER">PHOTOGRAPHER</div>
+                        <div class="dropdown-option" data-value="PHOTOSTATE SHOP">PHOTOSTATE SHOP</div>
+                        <div class="dropdown-option" data-value="PICO SHOP">PICO SHOP</div>
+                        <div class="dropdown-option" data-value="POLICE OFFICER">POLICE OFFICER</div>
+                        <div class="dropdown-option" data-value="PRINTING">PRINTING</div>
+                        <div class="dropdown-option" data-value="PUNCTURE SHOP">PUNCTURE SHOP</div>
+                        <div class="dropdown-option" data-value="REPARING">REPARING</div>
+                        <div class="dropdown-option" data-value="RENT A CAR">RENT A CAR</div>
+                        <div class="dropdown-option" data-value="RICKSHAW DRIVER">RICKSHAW DRIVER</div>
+                        <div class="dropdown-option" data-value="RIDER">RIDER</div>
+                        <div class="dropdown-option" data-value="SALE PURCHASE & REPAIR">SALE PURCHASE & REPAIR</div>
+                        <div class="dropdown-option" data-value="SALON">SALON</div>
+                        <div class="dropdown-option" data-value="SANITARY SHOP">SANITARY SHOP</div>
+                        <div class="dropdown-option" data-value="SCRAP">SCRAP</div>
+                        <div class="dropdown-option" data-value="SERVICE PROVIDER">SERVICE PROVIDER</div>
+                        <div class="dropdown-option" data-value="SHOE SHOP">SHOE SHOP</div>
+                        <div class="dropdown-option" data-value="SILAI MACHINE SHOP">SILAI MACHINE SHOP</div>
+                        <div class="dropdown-option" data-value="SIM STALL">SIM STALL</div>
+                        <div class="dropdown-option" data-value="SNOOKER CLUB">SNOOKER CLUB</div>
+                        <div class="dropdown-option" data-value="SOFA REPAIR">SOFA REPAIR</div>
+                        <div class="dropdown-option" data-value="SOLAR">SOLAR</div>
+                        <div class="dropdown-option" data-value="SPORTS SHOP">SPORTS SHOP</div>
+                        <div class="dropdown-option" data-value="STATIONARY">STATIONARY</div>
+                        <div class="dropdown-option" data-value="TAILOR">TAILOR</div>
+                        <div class="dropdown-option" data-value="TEACHER">TEACHER</div>
+                        <div class="dropdown-option" data-value="TOY SHOP">TOY SHOP</div>
+                        <div class="dropdown-option" data-value="TRADERS">TRADERS</div>
+                        <div class="dropdown-option" data-value="TRAVEL AGENCY">TRAVEL AGENCY</div>
+                        <div class="dropdown-option" data-value="TYRE SHOP">TYRE SHOP</div>
+                        <div class="dropdown-option" data-value="UNION HOLDER">UNION HOLDER</div>
+                        <div class="dropdown-option" data-value="VAPE SHOP">VAPE SHOP</div>
+                        <div class="dropdown-option" data-value="WAITER">WAITER</div>
+                        <div class="dropdown-option" data-value="WATCH SHOP">WATCH SHOP</div>
+                        <div class="dropdown-option" data-value="WATER PLANT">WATER PLANT</div>
+                        <div class="dropdown-option" data-value="WELDING SHOP">WELDING SHOP</div>
+                        <div class="dropdown-option" data-value="WOOD SHOP">WOOD SHOP</div>
+                        <div class="dropdown-option" data-value="WORK SHOP">WORK SHOP</div>
+                    </div>
+                    <input type="hidden" id="searchCategory" value="">
                 </div>
                 
                 <div class="form-group">
@@ -694,7 +1025,6 @@
                         <option value="SUKKAR">SUKKAR</option>
                         <option value="HYDERABAD">HYDERABAD</option>
                         <option value="ISLAMABAD">ISLAMABAD</option>
-                        <!-- More options can be added here later -->
                     </select>
                 </div>
                 
@@ -729,7 +1059,6 @@
                         <option value="UBL">UBL</option>
                         <option value="UPAISA">UPAISA</option>
                         <option value="ZINDAGI">ZINDAGI</option>
-                        <!-- More options can be added here later -->
                     </select>
                 </div>
                 
@@ -741,7 +1070,6 @@
                         <option value="CLOSED">CLOSED</option>
                         <option value="SENT FOR PRINTING">SENT FOR PRINTING</option>
                         <option value="IBAN RECEIVED">IBAN RECEIVED</option>
-                        <!-- More options can be added here later -->
                     </select>
                 </div>
             </div>
@@ -799,17 +1127,97 @@
         let allForms = [];
         let filteredForms = [];
 
-        // Theme Toggle
+        // Theme Toggle - Now cycles through 3 themes
+        const themes = ['light-theme', 'dark-theme', 'admaa-theme'];
+        let currentThemeIndex = 0;
+
         document.getElementById('theme-toggle').addEventListener('click', () => {
-            document.body.classList.toggle('dark-theme');
-            document.body.classList.toggle('light-theme');
-            const icon = document.querySelector('#theme-toggle i');
-            if (document.body.classList.contains('dark-theme')) {
-                icon.className = 'fas fa-sun';
-                document.getElementById('theme-toggle').innerHTML = '<i class="fas fa-sun"></i> Light Mode';
-            } else {
-                icon.className = 'fas fa-moon';
-                document.getElementById('theme-toggle').innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+            // Remove all theme classes
+            themes.forEach(theme => {
+                document.body.classList.remove(theme);
+            });
+            
+            // Move to next theme
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            const nextTheme = themes[currentThemeIndex];
+            
+            // Apply next theme
+            document.body.classList.add(nextTheme);
+            
+            // Update button text and icon
+            const themeToggle = document.getElementById('theme-toggle');
+            const icon = themeToggle.querySelector('i');
+            
+            switch(nextTheme) {
+                case 'light-theme':
+                    icon.className = 'fas fa-moon';
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+                    break;
+                case 'dark-theme':
+                    icon.className = 'fas fa-palette';
+                    themeToggle.innerHTML = '<i class="fas fa-palette"></i> ADMAA Theme';
+                    break;
+                case 'admaa-theme':
+                    icon.className = 'fas fa-sun';
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+                    break;
+            }
+        });
+
+        // Initialize theme
+        document.body.classList.add(themes[currentThemeIndex]);
+
+        // Searchable dropdown functionality for categories
+        document.addEventListener('DOMContentLoaded', function() {
+            const categorySearch = document.getElementById('categorySearch');
+            const categoryOptions = document.getElementById('categoryOptions');
+            const hiddenCategoryInput = document.getElementById('searchCategory');
+            const dropdownOptions = categoryOptions.querySelectorAll('.dropdown-option');
+            
+            // Set initial value
+            hiddenCategoryInput.value = '';
+            
+            categorySearch.addEventListener('focus', function() {
+                categoryOptions.classList.add('show');
+                filterOptions();
+            });
+            
+            categorySearch.addEventListener('input', filterOptions);
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!categorySearch.contains(e.target) && !categoryOptions.contains(e.target)) {
+                    categoryOptions.classList.remove('show');
+                }
+            });
+            
+            // Handle option selection
+            dropdownOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const value = this.getAttribute('data-value');
+                    const text = this.textContent;
+                    
+                    hiddenCategoryInput.value = value;
+                    categorySearch.value = text;
+                    categoryOptions.classList.remove('show');
+                    
+                    // Update selected state
+                    dropdownOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+            
+            function filterOptions() {
+                const searchTerm = categorySearch.value.toLowerCase();
+                
+                dropdownOptions.forEach(option => {
+                    const text = option.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        option.style.display = 'block';
+                    } else {
+                        option.style.display = 'none';
+                    }
+                });
             }
         });
 
@@ -820,6 +1228,8 @@
                 location: document.getElementById('searchLocation').value,
                 bank: document.getElementById('searchBank').value,
                 status: document.getElementById('searchStatus').value,
+                employee: document.getElementById('searchEmployee').value,
+                employeeText: document.getElementById('searchEmployeeText').value.trim(),
                 action: 'search'
             };
 
@@ -1046,7 +1456,7 @@
                             <div class="detail-value">${form.handOverToSalesStaff || 'N/A'}</div>
                         </div>
                         
-                        <div class="detail-group">
+                        .detail-group {
                             <div class="detail-label">FBL REFERENCE ID</div>
                             <div class="detail-value">${form.fblReferenceId || form.referalID || 'N/A'}</div>
                         </div>
@@ -1146,10 +1556,25 @@
 
         function resetFilters() {
             document.getElementById('searchMonth').value = '';
+            document.getElementById('searchEmployee').value = '';
+            document.getElementById('searchEmployeeText').value = '';
             document.getElementById('searchCategory').value = '';
+            document.getElementById('categorySearch').value = '';
             document.getElementById('searchLocation').value = '';
             document.getElementById('searchBank').value = '';
             document.getElementById('searchStatus').value = '';
+            
+            // Reset category dropdown
+            const categoryOptions = document.getElementById('categoryOptions');
+            const dropdownOptions = categoryOptions.querySelectorAll('.dropdown-option');
+            dropdownOptions.forEach(opt => {
+                opt.classList.remove('selected');
+                opt.style.display = 'block';
+            });
+            
+            // Select "All Categories" option
+            dropdownOptions[0].classList.add('selected');
+            document.getElementById('categorySearch').value = 'All Categories';
             
             document.getElementById('resultsContainer').style.display = 'none';
             allForms = [];
